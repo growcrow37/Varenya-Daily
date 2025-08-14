@@ -1,3 +1,4 @@
+
 // src/components/header.tsx
 "use client";
 
@@ -8,19 +9,21 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, Rss, Sun, Moon } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Menu, Rss } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Category } from "@/lib/types";
+import { getCategories } from "@/lib/data";
 
 export function Header() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     getCategories().then(setCategories);
   }, []);
 
-  const { theme, setTheme } = useTheme();
+
   const navLinks = [
     { name: "Home", href: "/" },
     ...categories.map(category => ({ name: category.name, href: `/category/${category.slug}` }))
@@ -34,52 +37,50 @@ export function Header() {
             <Rss className="h-6 w-6 text-primary" />
             <span className="font-bold font-headline text-xl text-foreground">Varenya Daily</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium text-muted-foreground">
+          <nav className="flex items-center space-x-6 text-sm font-medium">
             {navLinks.slice(0, 5).map(link => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition-colors text-gray-700 hover:text-red-800"
->
+                className="transition-colors text-muted-foreground hover:text-primary"
+              >
                 {link.name}
               </Link>
             ))}
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="md:hidden">
+          {isClient && <div className="md:hidden">
             <Sheet>
-              <SheetTrigger asChild className="text-foreground">
-                <Button variant="ghost" size="icon" className="text-gray-700">
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle Menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="bg-white">
+              <SheetContent side="left">
                 <Link href="/" className="mr-6 flex items-center space-x-2 mb-6">
-                  <Rss className="h-6 w-6 text-red-800" />
-                  <span className="font-bold font-headline text-xl text-gray-900">Varenya Daily</span>
+                  <Rss className="h-6 w-6 text-primary" />
+                  <span className="font-bold font-headline text-xl">Varenya Daily</span>
                 </Link>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map(link => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="transition-colors text-gray-700 hover:text-red-800 text-lg"
->
+                      className="transition-colors hover:text-primary text-lg"
+                    >
                       {link.name}
                     </Link>
                   ))}
                 </nav>
               </SheetContent>
             </Sheet>
-          </div>
+          </div>}
 
           <nav className="flex items-center">
-            {/* Theme Toggle Button */}
- {/* Admin Login Link */}
             <Link href="/admin/login">
-              <Button variant="outline" size="sm" className="border-red-800 text-red-800 hover:bg-red-800 hover:text-white">
+              <Button variant="outline" size="sm">
                 Admin Login
               </Button>
             </Link>

@@ -1,3 +1,4 @@
+
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter, Literata } from "next/font/google";
@@ -8,7 +9,8 @@ import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { AdblockDetector } from "@/components/adblock-detector";
 import { GoogleAnalytics } from "@/components/google-analytics";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/components/theme-provider";
+
 const fontBody = Inter({
   subsets: ["latin"],
   variable: "--font-body",
@@ -33,14 +35,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "font-body bg-white text-gray-900",
-          fontBody.className,
-          fontHeadline.className
+          "font-body bg-background text-foreground",
+          fontBody.variable,
+          fontHeadline.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+        >
           <AdblockDetector />
-          <div className="relative flex min-h-dvh flex-col bg-white">
+          <div className="relative flex min-h-dvh flex-col bg-background">
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
