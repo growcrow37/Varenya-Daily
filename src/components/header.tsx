@@ -30,9 +30,11 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
+          <Link href="/" legacyBehavior passHref>
+ <div className="mr-6 flex items-center space-x-2">
             <Rss className="h-6 w-6 text-primary" />
             <span className="font-bold font-headline text-xl">Varenya Daily</span>
+ </div>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             {navLinks.slice(0, 5).map(link => (
@@ -40,7 +42,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className="transition-colors hover:text-primary"
-              >
+                legacyBehavior>
                 {link.name}
               </Link>
             ))}
@@ -56,9 +58,11 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left">
-                <Link href="/" className="mr-6 flex items-center space-x-2 mb-6">
+                <Link href="/" legacyBehavior passHref>
+ <div className="mr-6 flex items-center space-x-2 mb-6">
                   <Rss className="h-6 w-6 text-primary" />
                   <span className="font-bold font-headline text-xl">Varenya Daily</span>
+ </div>
                 </Link>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map(link => (
@@ -66,7 +70,7 @@ export function Header() {
                       key={link.href}
                       href={link.href}
                       className="transition-colors hover:text-primary text-lg"
-                    >
+                      legacyBehavior>
                       {link.name}
                     </Link>
                   ))}

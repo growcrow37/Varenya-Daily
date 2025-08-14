@@ -38,7 +38,7 @@ export default async function AdminArticlesPage() {
                 <CardTitle>Articles</CardTitle>
                 <CardDescription>Manage your blog posts here.</CardDescription>
             </div>
-            <Link href="/admin/articles/new">
+            <Link href="/admin/articles/new" legacyBehavior>
                 <Button>
                     <PlusCircle className="mr-2 h-4 w-4" />
                     New Article
@@ -78,7 +78,7 @@ export default async function AdminArticlesPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <Link href={`/admin/articles/edit/${article.id}`}>
+                      <Link href={`/admin/articles/edit/${article.id}`} legacyBehavior>
                         <DropdownMenuItem>Edit</DropdownMenuItem>
                       </Link>
                       <DropdownMenuItem className="text-red-500 hover:!text-red-500">Delete</DropdownMenuItem>

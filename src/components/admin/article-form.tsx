@@ -133,7 +133,7 @@ export function ArticleForm({ article, categories }: ArticleFormProps) {
               </div>
               <div className="flex gap-2">
                 <Button type="submit" className="flex-1">{article ? "Save Changes" : "Create Article"}</Button>
-                <Link href="/admin/articles">
+                <Link href="/admin/articles" legacyBehavior>
                     <Button variant="outline" type="button">Cancel</Button>
                 </Link>
               </div>

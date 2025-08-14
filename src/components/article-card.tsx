@@ -10,7 +10,7 @@ type ArticleCardProps = {
 
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Link href={`/articles/${article.slug}`}>
+    <Link href={`/articles/${article.slug}`} legacyBehavior>
       <div className="group overflow-hidden rounded-lg bg-card shadow-lg transition-shadow duration-300 hover:shadow-primary/20">
         <div className="relative">
           <Image
