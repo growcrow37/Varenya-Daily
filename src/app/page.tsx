@@ -24,7 +24,7 @@ export default async function Home() {
           {/* Featured Article */}
           {featuredArticle && (
             <div className="mb-12">
-              <Link href={`/articles/${featuredArticle.slug}`}>
+              <Link href={`/articles/${featuredArticle.slug}`} legacyBehavior>
                 <div className="group relative block overflow-hidden rounded-lg bg-white shadow-xl border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
                   <Image
                     src={featuredArticle.imageUrl}
@@ -76,7 +76,7 @@ export default async function Home() {
               <ul className="mt-4 space-y-4">
                 {importantArticles.map((article) => (
                   <li key={article.id} className="border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
-                    <Link href={`/articles/${article.slug}`}>
+                    <Link href={`/articles/${article.slug}`} legacyBehavior>
                       <div className="group flex items-center space-x-4">
                         <div className="flex-grow">
                           <p className="text-sm text-gray-600">{article.category.name}</p>

@@ -28,7 +28,7 @@ export function AdminSidebar() {
   const NavContent = () => (
     <div className="flex h-full flex-col">
        <div className="flex h-16 items-center border-b px-4">
-        <Link className="flex items-center gap-2 font-semibold" href="/">
+        <Link className="flex items-center gap-2 font-semibold" href="/" legacyBehavior>
           <Rss className="h-6 w-6 text-primary" />
           <span className="font-headline text-lg">Varenya Daily</span>
         </Link>
@@ -43,7 +43,7 @@ export function AdminSidebar() {
                 "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
                 pathname === item.href && "bg-muted text-primary"
               )}
-            >
+              legacyBehavior>
               <item.icon className="h-4 w-4" />
               {item.name}
             </Link>
@@ -70,7 +70,7 @@ export function AdminSidebar() {
             <NavContent />
           </SheetContent>
         </Sheet>
-        <Link className="flex items-center gap-2 font-semibold" href="/">
+        <Link className="flex items-center gap-2 font-semibold" href="/" legacyBehavior>
           <Rss className="h-6 w-6 text-primary" />
           <span className="font-headline text-lg">Admin</span>
         </Link>

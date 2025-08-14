@@ -62,7 +62,8 @@ export default async function AdminCommentsPage() {
                 <TableCell>
                   <Link
                     href={`/articles/${comment.articleSlug}`}
-                    className="hover:underline">
+                    className="hover:underline"
+                    legacyBehavior>
                     {comment.articleTitle}
                   </Link>
                 </TableCell>

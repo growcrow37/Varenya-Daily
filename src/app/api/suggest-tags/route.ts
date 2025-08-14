@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing content in request body' }, { status: 400 });
     }
 
-    const suggestedTags = await suggestTags({ blogPost: content });
+    const suggestedTags = await suggestTags({ blogPostContent: content });
 
     return NextResponse.json(suggestedTags);
   } catch (error) {
