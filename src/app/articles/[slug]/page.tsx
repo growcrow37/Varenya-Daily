@@ -1,3 +1,4 @@
+// src/app/articles/[slug]/page.tsx
 import { getArticleBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -22,17 +23,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-8">
+    <div className="container mx-auto max-w-4xl px-4 py-8 bg-background">
       <article>
         <header className="mb-8">
           <div className="mb-4">
-            <Badge variant="secondary">{article.category.name}</Badge>
+            <Badge variant="secondary" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              {article.category.name}
+            </Badge>
           </div>
-          <h1 className="font-headline text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="font-headline text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
             {article.title}
           </h1>
-          <div className="mt-4 flex items-center space-x-4 text-sm text-muted-foreground">
-            <div className="flex items-center space-x-2">
+          <div className="mt-4 flex items-center space-x-4 text-sm text-gray-600">
+            <div className="flex items-center space-x-2 text-muted-foreground">
               <Calendar className="h-4 w-4" />
               <span>{format(new Date(article.createdAt), "MMMM d, yyyy")}</span>
             </div>
@@ -52,11 +55,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           className="mb-8 w-full rounded-lg object-cover shadow-lg"
         />
 
-        <div className="prose prose-invert max-w-none text-lg leading-relaxed prose-p:text-foreground/90 prose-headings:text-primary prose-headings:font-headline prose-a:text-primary hover:prose-a:underline">
-          <p className="text-xl italic text-muted-foreground">
+        <div className="prose prose-lg max-w-none leading-relaxed text-foreground/90">
+          <p className="text-xl italic text-muted-foreground mb-6">
             {article.excerpt}
           </p>
-          <p>
+          <p className="mb-6 text-foreground">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
             euismod, nisl nec ultricies lacinia, nisl nisl aliquet nisl, eget
             aliquet nisl nisl sit amet nisl. Sed euismod, nisl nec ultricies
@@ -64,12 +67,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             nisl.
           </p>
           <AdPlaceholder className="my-8 h-48 w-full" />
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+          <p className="mb-6">
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. text-foreground
             Donec sed odio dui. Nullam id dolor id nibh ultricies vehicula ut id
             elit. Curabitur blandit tempus porttitor.
           </p>
-          <p>
+          <p className="mb-6 text-foreground">
             Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
             auctor. Duis mollis, est non commodo luctus, nisi erat porttitor
             ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac
@@ -79,15 +82,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         <div className="mt-8 flex flex-wrap gap-2">
           {article.tags.map((tag) => (
-            <Badge key={tag} variant="outline">
-              {tag}
+            <Badge key={tag} variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-100">
+              border-border text-foreground hover:bg-accent
             </Badge>
           ))}
         </div>
       </article>
 
-      <section className="mt-12 border-t border-border pt-8">
-        <h2 className="font-headline text-3xl font-bold">Comments</h2>
+      <section className="mt-12 border-t border-gray-200 pt-8">
+        <h2 className="font-headline text-3xl font-bold text-foreground">Comments</h2>
         <CommentForm articleId={article.id} />
         <CommentList articleId={article.id} />
       </section>

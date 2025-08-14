@@ -1,3 +1,4 @@
+// src/app/admin/comments/page.tsx
 import Link from "next/link";
 import {
   Card,
@@ -61,8 +62,7 @@ export default async function AdminCommentsPage() {
                 <TableCell>
                   <Link
                     href={`/articles/${comment.articleSlug}`}
-                    className="hover:underline"
-                    legacyBehavior>
+                    className="hover:underline">
                     {comment.articleTitle}
                   </Link>
                 </TableCell>

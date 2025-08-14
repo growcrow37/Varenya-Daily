@@ -1,3 +1,4 @@
+// src/app/page.tsx
 import { AdPlaceholder } from "@/components/ad-placeholder";
 import { ArticleCard } from "@/components/article-card";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,7 @@ export default async function Home() {
   const importantArticles = articles.slice(5, 9);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-white">
       <div className="mb-8">
         <AdPlaceholder className="h-24 w-full" />
       </div>
@@ -23,8 +24,8 @@ export default async function Home() {
           {/* Featured Article */}
           {featuredArticle && (
             <div className="mb-12">
-              <Link href={`/articles/${featuredArticle.slug}`} legacyBehavior>
-                <div className="group relative block overflow-hidden rounded-lg bg-card shadow-lg">
+              <Link href={`/articles/${featuredArticle.slug}`}>
+                <div className="group relative block overflow-hidden rounded-lg bg-white shadow-xl border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
                   <Image
                     src={featuredArticle.imageUrl}
                     alt={featuredArticle.title}
@@ -36,7 +37,7 @@ export default async function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   <div className="absolute bottom-0 w-full p-6 text-white md:p-8">
-                    <span className="mb-2 inline-block rounded-full bg-primary/80 px-3 py-1 text-sm font-semibold text-primary-foreground">
+                    <span className="mb-2 inline-block rounded-full bg-red-800/90 px-3 py-1 text-sm font-semibold text-white">
                       {featuredArticle.category.name}
                     </span>
                     <h1 className="font-headline text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
@@ -53,7 +54,7 @@ export default async function Home() {
 
           {/* Recent Articles */}
           <div>
-            <h2 className="font-headline text-3xl font-bold">Recent News</h2>
+            <h2 className="font-headline text-3xl font-bold text-gray-900">Recent News</h2>
             <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
               {recentArticles.map((article) => (
                 <ArticleCard key={article.id} article={article} />
@@ -68,22 +69,22 @@ export default async function Home() {
             <div className="mb-8">
               <AdPlaceholder className="h-64 w-full" />
             </div>
-            <div className="rounded-lg bg-card p-6 shadow-lg">
-              <h3 className="font-headline text-2xl font-bold">
+            <div className="rounded-lg bg-white p-6 shadow-lg border border-gray-200">
+              <h3 className="font-headline text-2xl font-bold text-gray-900">
                 Important Reads
               </h3>
               <ul className="mt-4 space-y-4">
                 {importantArticles.map((article) => (
-                  <li key={article.id} className="border-b border-border pb-4 last:border-b-0 last:pb-0">
-                    <Link href={`/articles/${article.slug}`} legacyBehavior>
+                  <li key={article.id} className="border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+                    <Link href={`/articles/${article.slug}`}>
                       <div className="group flex items-center space-x-4">
                         <div className="flex-grow">
-                          <p className="text-sm text-muted-foreground">{article.category.name}</p>
-                          <h4 className="font-semibold leading-tight group-hover:text-primary">
+                          <p className="text-sm text-gray-600">{article.category.name}</p>
+                          <h4 className="font-semibold leading-tight text-gray-900 group-hover:text-red-800">
                             {article.title}
                           </h4>
                         </div>
-                        <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary" />
+                        <ArrowRight className="h-5 w-5 text-gray-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-red-800" />
                       </div>
                     </Link>
                   </li>
