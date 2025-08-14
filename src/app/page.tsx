@@ -31,6 +31,7 @@ export default async function Home() {
                     alt={featuredArticle.title}
                     width={800}
                     height={450}
+                    priority
                     data-ai-hint="news article"
                     className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />

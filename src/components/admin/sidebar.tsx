@@ -12,7 +12,9 @@ import {
   Rss,
   Settings,
 } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 const navItems = [
   { name: "Dashboard", href: "/admin", icon: Home },
@@ -23,6 +25,7 @@ const navItems = [
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const { setTheme, theme } = useTheme();
 
   const NavContent = () => (
     <div className="flex h-full flex-col">
@@ -48,6 +51,16 @@ export function AdminSidebar() {
             </Link>
           ))}
         </nav>
+      </div>
+      <div className="mt-auto p-4 border-t">
+        <Button
+          variant="outline"
+          size="icon"
+          className="w-full"
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        >
+          {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+        </Button>
       </div>
     </div>
   );

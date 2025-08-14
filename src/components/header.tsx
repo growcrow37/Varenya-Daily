@@ -7,8 +7,9 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, Rss } from "lucide-react";
-import { getCategories } from "@/lib/data";
+import { Menu, Rss, Sun, Moon } from "lucide-react";
+import { getCategories } from "@/lib/data"; // Assuming this is where your data fetching is
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import type { Category } from "@/lib/types";
 
@@ -18,7 +19,8 @@ export function Header() {
   useEffect(() => {
     getCategories().then(setCategories);
   }, []);
-  
+
+  const { theme, setTheme } = useTheme();
   const navLinks = [
     { name: "Home", href: "/" },
     ...categories.map(category => ({ name: category.name, href: `/category/${category.slug}` }))
@@ -74,7 +76,17 @@ export function Header() {
           </div>
 
           <nav className="flex items-center">
-            <Link href="/admin/login">
+            {/* Theme Toggle Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+            {/* Admin Login Link */}
+            <Link href="/admin/login" passHref legacyBehavior>
               <Button variant="outline" size="sm">Admin Login</Button>
             </Link>
           </nav>

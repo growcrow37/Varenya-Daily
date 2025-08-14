@@ -16,6 +16,7 @@ export function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
     <>
       <Script
         strategy="afterInteractive"
+        async
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
       />
       <Script
