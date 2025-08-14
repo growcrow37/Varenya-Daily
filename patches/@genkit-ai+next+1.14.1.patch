@@ -1,0 +1,19 @@
+diff --git a/node_modules/@genkit-ai/next/package.json b/node_modules/@genkit-ai/next/package.json
+index 3e6a0d2..a49a888 100644
+--- a/node_modules/@genkit-ai/next/package.json
++++ b/node_modules/@genkit-ai/next/package.json
+@@ -29,6 +29,12 @@
+       "import": "./lib/index.mjs",
+       "types": "./lib/index.d.ts"
+     },
++    "./react": {
++      "require": "./lib/react/index.js",
++      "import": "./lib/react/index.mjs",
++      "types": "./lib/react/index.d.ts"
++    },
+     "./middleware": {
+       "require": "./lib/middleware/index.js",
+       "import": "./lib/middleware/index.mjs",
+diff --git a/node_modules/@genkit-ai/next/README.md b/node_modules/@genkit-ai/next/README.md
+new file mode 100644
+index 0000000..e69de29
