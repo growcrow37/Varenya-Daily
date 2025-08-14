@@ -15,8 +15,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, X, Loader2 } from "lucide-react";
-import { suggestTags, SuggestTagsInput } from "@/ai/flows/suggest-tags";
-import { useFlow } from "@genkit-ai/next/react";
 
 type ArticleFormProps = {
   article?: Article;
@@ -31,8 +29,8 @@ export function ArticleForm({ article, categories }: ArticleFormProps) {
   const [isPublished, setIsPublished] = useState(article?.status === "Published" || false);
   const [tags, setTags] = useState<string[]>(article?.tags || []);
   const [tagInput, setTagInput] = useState("");
-  
-  const { run: suggestTagsFlow, running } = useFlow(suggestTags);
+  const [isSuggestingTags, setIsSuggestingTags] = useState(false);
+  // const { run: suggestTagsFlow, running } = useFlow(suggestTags); // This will be replaced by an API call
 
   const handleSuggestTags = async () => {
     if (!content) {
@@ -43,10 +41,25 @@ export function ArticleForm({ article, categories }: ArticleFormProps) {
       });
       return;
     }
-    const result = await suggestTagsFlow({ blogPostContent: content });
-    if (result?.tags) {
-        const newTags = result.tags.filter(t => !tags.includes(t));
-        setTags([...tags, ...newTags]);
+
+    setIsSuggestingTags(true);
+    try {
+      const response = await fetch('/api/suggest-tags', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ blogPostContent: content }),
+      });
+
+      const result = await response.json();
+
+      if (result?.tags) {
+          const newTags = result.tags.filter((t: string) => !tags.includes(t));
+          setTags([...tags, ...newTags]);
+      }
+    } finally {
+      setIsSuggestingTags(false);
     }
   };
 
@@ -170,10 +183,10 @@ export function ArticleForm({ article, categories }: ArticleFormProps) {
                         onChange={(e) => setTagInput(e.target.value)}
                         onKeyDown={handleTagKeyDown}
                     />
-                    <Button type="button" variant="outline" onClick={handleSuggestTags} disabled={running}>
-                        {running ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+ <Button type="button" variant="outline" onClick={handleSuggestTags} disabled={isSuggestingTags}>
+ {isSuggestingTags ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
                     </Button>
-                </div>
+    </div>
                  <div className="mt-2 flex flex-wrap gap-2">
                     {tags.map(tag => (
                         <Badge key={tag} variant="secondary">
